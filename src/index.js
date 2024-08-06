@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 // import mongoose from "mongoose";
 // import { DB_NAME } from "../constants.js";
 import connectDB from "./db/index.js";
+import { errorMessage } from "stream-chat-react/dist/components/AutoCompleteTextarea/utils.js";
 dotenv.config({
     path: "./env"
 })
@@ -9,6 +10,14 @@ dotenv.config({
 
 
 connectDB()
+.then(() =>{
+    app.listen(process.env.PORT|| 8000,() =>{
+        console.log(`Server is running on port ${process.env.PORT}`);
+    })
+})
+.catch((err) =>{
+    console.log("MONGO db connection FAILED !!! ", err);
+})
 /*
 (async () => {
     try {
